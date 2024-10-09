@@ -13,4 +13,4 @@ jobs:
             - name: build imagem docker
               run: docker build . -t gabrielcarl/fastapi-image:latest -t gabrielcarl/fastapi-image:${{ github.run_number }}
             - name: push imagem docker
-              run: 
+              run: docker push --all-tags gabrielcarl/fastapi-image
