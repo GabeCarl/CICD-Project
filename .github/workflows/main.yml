@@ -12,5 +12,7 @@ jobs:
               uses: actions/checkout@v4
             - name: build imagem docker
               run: docker build . -t gabrielcarl/fastapi-image:latest -t gabrielcarl/fastapi-image:${{ github.run_number }}
+            - name: login no docker hub
+              run: docker login -u gabrielcarl -p ${{ secrets.TOKEN_DOCKERHUB }}
             - name: push imagem docker
               run: docker push --all-tags gabrielcarl/fastapi-image
