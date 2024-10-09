@@ -1,0 +1,16 @@
+name: GitHub Actions Test
+
+on:
+    push:
+        branches: ["main"]
+
+jobs:
+    publicar_imagem_docker:
+        runs-on: ubuntu-latest
+        steps:
+            - name: chackout
+              uses: actions/checkout@v4
+            - name: build imagem docker
+              run: docker build . -t gabrielcarl/fastapi-image:latest -t gabrielcarl/fastapi-image:${{ github.run_number }}
+            - name: push imagem docker
+              run: 
