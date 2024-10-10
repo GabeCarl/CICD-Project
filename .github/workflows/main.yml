@@ -11,9 +11,9 @@ jobs:
             - name: chackout
               uses: actions/checkout@v4
             - name: build imagem docker
-              run: docker build . -t gabrielcarl/fastapi-image:latest -t gabrielcarl/fastapi-image:${{ github.run_number }}
+              run: docker build . -t ${{ vars.DOCKER_REPOSITORY }}:latest -t ${{ vars.DOCKER_REPOSITORY }}:${{ github.run_number }}
             - name: login no docker hub
-              run: docker login -u gabrielcarl -p ${{ secrets.TOKEN_DOCKERHUB }}
+              run: docker login -u ${{ secrets.USER_DOCKER }} -p ${{ secrets.TOKEN_DOCKERHUB }}
             - name: push imagem docker
-              run: docker push --all-tags gabrielcarl/fastapi-image
+              run: docker push --all-tags ${{ vars.DOCKER_REPOSITORY }}
 # Te
