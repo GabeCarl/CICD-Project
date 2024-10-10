@@ -16,4 +16,20 @@ jobs:
               run: docker login -u ${{ secrets.USER_DOCKER }} -p ${{ secrets.TOKEN_DOCKERHUB }}
             - name: push imagem docker
               run: docker push --all-tags ${{ vars.DOCKER_REPOSITORY }}
-# Te
+
+    trivy_test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+            - name: build docker
+              run: docker build . -t testedocker:${{ github.sha }}
+            - name: realizar teste
+              uses: aquasecurity/trivy-action@0.26.0
+              with:
+                  image-ref: 'testedocker:${{ github.sha }}'
+                  format: 'table'
+                  exit-code: '1'
+                  ignore-unfixed: true
+                  vuln-type: 'library'
+                  severity: 'CRITICAL,HIGH'
