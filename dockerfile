@@ -1,6 +1,8 @@
 
 FROM python:latest
 
+RUN pip install starlette
+
 WORKDIR /code
 
 COPY ./requirements.txt /code/requirements.txt
