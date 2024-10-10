@@ -1,12 +1,6 @@
 
 FROM python:3.12-alpine
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    python3-dev \
-    libffi-dev \
-    && apt-get clean
-
 WORKDIR /code
 
 COPY ./requirements.txt /code/requirements.txt
